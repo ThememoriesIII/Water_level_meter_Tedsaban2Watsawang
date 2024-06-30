@@ -58,7 +58,7 @@ class ULTRASONIC
     if (duration == 0 || duration < 0)
       centimeter = 0;
     else
-      centimeter=(duration *0.03492 v )/ 2.0;
+      centimeter=(duration *0.03492 )/ 2.0;
       //centimeter=duration / v / 2.0;
       //centimeter = duration / 29 / 2;
     return centimeter;
