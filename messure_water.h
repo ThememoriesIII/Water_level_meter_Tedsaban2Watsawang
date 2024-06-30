@@ -1,30 +1,13 @@
 void mesure_water_level() {
   if ((millis() - preves_time_messure) > timeInterval_messure) {
-    //temperature=temperature();
-    //temperature = temprature_sens_read();
-    //Serial.println(temperature);
-    //temperature=31.5;
-    //temp_sensor_read_celsius(&temperature);
-    ultrasonic_sensor.echo();
-    /*if (temperature < 0 || temperature == 0) {
-      //Serial.println("loop v");
-      ultrasonic_sensor.echo();
-    } else {
-      //Serial.println("loop temp");
-      ultrasonic_sensor.echo(temperature);
-    }*/
-    distance = ultrasonic_sensor.to_centimeter();
-    //Serial.println(distance);
+    distance = ultrasonic_sensor.echo();
     preves_time_messure = millis();
   }
-  /*
-  ultrasonic_sensor.echo();
-  distance = ultrasonic_sensor.to_centimeter();*/
+  
   lcd.setCursor(0, 0);
-  sprintf(lcd_buffer0, "Distance:%03d    ", distance);
+  sprintf(lcd_buffer0, "Distance:%03.02f    ", distance);
   lcd.print(lcd_buffer0);
-  //lcd.print("Distance:");
-  //digit_ultrasonic(distance);
+  
   if (distance>0) {
     if (container == cylinder) {
       water_liter = 3.14 * (radius * radius) * (float)abs(deep - distance);

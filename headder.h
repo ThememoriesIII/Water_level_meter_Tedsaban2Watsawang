@@ -24,27 +24,7 @@ unsigned char LED = 2;
 #include <WiFiManager.h>
 #include <PubSubClient.h>
 //#include <ArduinoJson.h>
-/*
-#ifdef __cplusplus
-extern "C" {
-#endif
-  uint8_t temprature_sens_read();
-#ifdef __cplusplus
-}
-#endif
 
-uint8_t temprature_sens_read();
-*/
-/*
-#include "driver/temp_sensor.h"
-
-void initTempSensor(){
-    temp_sensor_config_t temp_sensor = TSENS_CONFIG_DEFAULT();
-    temp_sensor.dac_offset = TSENS_DAC_L2;  // TSENS_DAC_L2 is default; L4(-40°C ~ 20°C), L2(-10°C ~ 80°C), L1(20°C ~ 100°C), L0(50°C ~ 125°C)
-    temp_sensor_set_config(temp_sensor);
-    temp_sensor_start();
-}
-*/
 //include debounce button and ultrasonic
 #include "debounce.h"
 #include "ultrasonic.h"
@@ -131,7 +111,7 @@ byte not_press = HIGH;
 //water level section
 float temperature = 0.0;
 float humidity = 0.0;
-long distance = 0;
+float distance = 0;
 byte widht = 0;
 byte deep = 0;
 byte radius = 0;
@@ -291,7 +271,7 @@ void reconnect() {
   }
 }
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void revc_callback(char* topic, byte* payload, unsigned int length) {
   String message;
   for (int i = 0; i < length; i++) {
     message = message + (char)payload[i];

@@ -23,7 +23,7 @@ class ULTRASONIC
   }
   // echo first and get time duration and convert to centimeter for millimeter 
   //echo ultrasonic to piont and wait sound to return to tranducer for messure time
-  void echo()
+  float echo()
   {
     digitalWrite(trig_pin, LOW);
     delayMicroseconds(2);
@@ -31,6 +31,7 @@ class ULTRASONIC
     delayMicroseconds(5);
     digitalWrite(trig_pin, LOW);
     duration = pulseIn(echo_pin, HIGH);
+    return to_centimeter();
     //v=29;
     //return duration;
   }

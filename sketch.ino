@@ -48,7 +48,7 @@ void setup() {
   delay(1000);
 
   client.setServer(mqtt_server, mqtt_port);
-  client.setCallback(callback);
+  client.setCallback(revc_callback);
 
   widht = (byte)EEPROM.read(0);
   deep = (byte)EEPROM.read(1);
