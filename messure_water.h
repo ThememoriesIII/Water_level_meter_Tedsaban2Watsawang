@@ -1,9 +1,9 @@
-void mesure_water_level() {
+void mesure_water_view() {
   /*if ((millis() - preves_time_messure) > timeInterval_messure) {
     distance = ultrasonic_sensor.echo();
     preves_time_messure = millis();
   }*/
-  distance=ultrasonic_sensor.messure();
+  //distance=ultrasonic_sensor.messure();
   lcd.setCursor(0, 0);
   sprintf(lcd_buffer0, "Distance:%03.02f    ", distance);
   lcd.print(lcd_buffer0);
