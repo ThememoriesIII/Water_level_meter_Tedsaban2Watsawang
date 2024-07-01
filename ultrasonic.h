@@ -8,18 +8,30 @@ class ULTRASONIC
   byte echo_pin=0;
   unsigned long duration = 0;
   float temp=0;
-  float v=0;
+  float v=0.03492;
+  unsigned long preves_time_messure=0;
+  unsigned int timeInterval_messure=1000;
+  float centimeter=0;
 
   public:
   ULTRASONIC(byte pingpin,byte inpin)
   {
     trig_pin = pingpin;
     echo_pin = inpin;
+    timeInterval_messure=1000;
+  }
+  ULTRASONIC(byte pingpin,byte inpin,unsigned int time_task)
+  {
+    trig_pin = pingpin;
+    echo_pin = inpin;
+    timeInterval_messure=time_task;
+    preves_time_messure=millis();
   }
   void begin()
   {
     pinMode(trig_pin, OUTPUT);
     pinMode(echo_pin, INPUT);
+    preves_time_messure=millis();
   }
   // echo first and get time duration and convert to centimeter for millimeter 
   //echo ultrasonic to piont and wait sound to return to tranducer for messure time
@@ -31,7 +43,7 @@ class ULTRASONIC
     delayMicroseconds(5);
     digitalWrite(trig_pin, LOW);
     duration = pulseIn(echo_pin, HIGH);
-    return to_centimeter();
+    //return to_centimeter();
     //v=29;
     //return duration;
   }
@@ -51,17 +63,25 @@ class ULTRASONIC
   }
 
   //microsecond to centimeters
-  unsigned long to_centimeter()
+  void to_centimeter()
   {
     //Serial.print("Duration");
     //Serial.println(duration);
-    unsigned int centimeter=0;
     if (duration == 0 || duration < 0)
       centimeter = 0;
     else
-      centimeter=(duration *0.03492 )/ 2.0;
+      centimeter=(duration * v )/ 2.0;
       //centimeter=duration / v / 2.0;
       //centimeter = duration / 29 / 2;
+    //return centimeter;
+  }
+  float messure()
+  {
+    if ((millis() - preves_time_messure) > timeInterval_messure) {
+      echo();
+      to_centimeter();
+      preves_time_messure = millis();
+    }
     return centimeter;
   }
 };
