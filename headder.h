@@ -61,16 +61,13 @@ char lcd_buffer1[17];
 
 
 //ultrasonic section
-ULTRASONIC ultrasonic_sensor(pingPin, inPin);
+ULTRASONIC ultrasonic_sensor(pingPin, inPin,1000);
 
 long num_count = 0;
 unsigned char led_state = 0;
 
 unsigned long preves_time_msg = 0;
 unsigned int timeInterval_send_msg = 2000;
-
-unsigned long preves_time_messure = 0;
-unsigned int timeInterval_messure = 1000;
 
 float water_liter = 0;
 
