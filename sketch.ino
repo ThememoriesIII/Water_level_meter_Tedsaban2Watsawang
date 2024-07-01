@@ -112,9 +112,12 @@ void loop() {
       shape_count = container;
     }
   }
+
+  distance=ultrasonic_sensor.messure();
+
   if (opration == messure) {
     //temperature=temprature_sens_read();
-    mesure_water_level();
+    mesure_water_view();
   } else {
     if (opration == seting) {
       shape_setting();
