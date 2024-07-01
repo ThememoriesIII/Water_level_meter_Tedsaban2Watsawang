@@ -71,7 +71,6 @@ void setup() {
     container = cube;
   }
   preves_time_msg = millis();
-  preves_time_messure = millis();
 }
 
 void loop() {
