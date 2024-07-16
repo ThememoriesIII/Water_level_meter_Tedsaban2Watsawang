@@ -35,7 +35,7 @@ class ULTRASONIC
   }
   // echo first and get time duration and convert to centimeter for millimeter 
   //echo ultrasonic to piont and wait sound to return to tranducer for messure time
-  float echo()
+  void echo()
   {
     digitalWrite(trig_pin, LOW);
     delayMicroseconds(2);
@@ -47,21 +47,28 @@ class ULTRASONIC
     //v=29;
     //return duration;
   }
-  void echo(float temp_0)
+ /* void echo(float temp_0)
   {
+    Serial.println("1");
     digitalWrite(trig_pin, LOW);
+    Serial.println("1");
     delayMicroseconds(2);
+    Serial.println("1");
     digitalWrite(trig_pin, HIGH);
+    Serial.println("1");
     delayMicroseconds(5);
+    Serial.println("1");
     digitalWrite(trig_pin, LOW);
+    Serial.println("1");
     duration = pulseIn(echo_pin, HIGH);
+    Serial.println("1");
     //temp = ((temp_0-32)/1.8);
     //v=1.0/(((331.5+(0.61*temp))*100.0)/pow(10,6.0));
     //Serial.println(temp);
      //Serial.println(v);
     //return duration;
   }
-
+*/
   //microsecond to centimeters
   void to_centimeter()
   {
