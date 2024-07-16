@@ -33,6 +33,9 @@ void netpie_msg() {
       strcat(msg, shape_name[(byte)container].c_str());
       //strcat(msg, "cube");
       //Serial.println(shape_name[(byte)container]);
+      strcat(msg, "\",\"Water_state\":\"");
+      strcat(msg, water_level_state.c_str());
+      
       strcat(msg, "\",\"Alarm\":\"");
       strcat(msg, alarm_string[alarm_state].c_str());
       //Serial.println(alarm_string[alarm_state]);
