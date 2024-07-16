@@ -7,7 +7,7 @@
 #define exit_pin 17
 #define button_debounce_time 50
 #define sound_pin 13
-#define sound_frequency 10000
+#define sound_frequency 1047
 #define EEPROM_SIZE 7
 unsigned char LED = 2;
 #define pingPin 5
@@ -30,8 +30,11 @@ unsigned char LED = 2;
 #include "ultrasonic.h"
 #include "melody_kan.h"
 #include "enum.h"
+//#include <ToneESP32.h>
 
-MELODY sound1(sound_pin,sound_frequency);
+//#define BUZZER_PIN 13
+//#define BUZZER_CHANNEL 0
+MELODY sound1(sound_pin,sound_frequency,0);
 
 //Wifi Manager
 
@@ -40,13 +43,30 @@ WiFiManager wifimanager;
 #define MAX_MSG 512
 char msg[MAX_MSG];
 //netpie
-
+//device 01
+/*
 const char* mqtt_server = "mqtt.netpie.io";
 const int mqtt_port = 1883;
 const char* mqtt_Client = "c040a1fb-170d-48f7-b6a1-19e03c37b11f";
 const char* mqtt_username = "Mb7gTnyPtmo2ZtWMzU99iyAxewA55MtG";
 const char* mqtt_password = "O67U2XKRbB_Q4HfhA9TSRlz0n3RHsmZB";
+*/
+//device 02
+/*
+const char* mqtt_server = "mqtt.netpie.io";
+const int mqtt_port = 1883;
+const char* mqtt_Client = "5c9233af-6625-4efa-8462-1e81b5f7b48f";
+const char* mqtt_username = "Gdb7oKjzVcfB7yQJUwrARNavgEkCDVJ4";
+const char* mqtt_password = "mjbiur8MwMngbgE6eMKwo8q6aJFE8Gcq";
+*/
+//device 03
 
+
+const char* mqtt_server = "mqtt.netpie.io";
+const int mqtt_port = 1883;
+const char* mqtt_Client = "4c7e55ee-885b-4c53-bd23-14bb63dec3f5";
+const char* mqtt_username = "y2m1Jd1nP8RUDApDY6wPnzA4ngsGjCT4";
+const char* mqtt_password = "yi6EwGuex4Qk4tGANzkjwNXpm4srxsUN";
 
 
 WiFiClient espClient;
@@ -55,7 +75,8 @@ PubSubClient client(espClient);
 
 
 //lcd section
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+//LiquidCrystal_I2C lcd(0x27, 16, 2);
+LiquidCrystal_I2C lcd(0x3F, 16, 2);
 char lcd_buffer0[17];
 char lcd_buffer1[17];
 
@@ -68,12 +89,13 @@ long num_count = 0;
 unsigned char led_state = 0;
 
 unsigned long preves_time_msg = 0;
-unsigned int timeInterval_send_msg = 2000;
+unsigned int timeInterval_send_msg = 10000;
 
 float water_liter = 0;
-
-
+float pre_deep=0;
+String water_level_string[2]={"WaterUP","WaterDW"};
 String shape_name[4] = { "cylinder", "cube", "thetradom", "cone" };
+String water_level_state="WaterUP";
 shape container = cube;
 shape container_buffer = cube;
 byte shape_index_eeeprom = 6;
@@ -255,12 +277,12 @@ void revc_callback(char* topic, byte* payload, unsigned int length) {
   //Serial.println(message);
   if (String(topic) == "@msg/led") {
     if (message == "on") {
-      client.publish("@shadow/data/update", "{\"data\" : {\"led\" : \"on\"}}");
+      client.publish("@shadow/data/update", "{\"data\" : {\"relay1\" : \"on\"}}");
       lcd.setCursor(0, 1);
       sprintf(lcd_buffer1, "%-16s", "RECIVE DATA ON");
       lcd.print(lcd_buffer1);
     } else if (message == "off") {
-      client.publish("@shadow/data/update", "{\"data\" : {\"led\" : \"off\"}}");
+      client.publish("@shadow/data/update", "{\"data\" : {\"relay1\" : \"off\"}}");
       lcd.setCursor(0, 1);
       sprintf(lcd_buffer1, "%-16s", "RECIVE DATA OFF");
       lcd.print(lcd_buffer1);
