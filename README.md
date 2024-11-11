@@ -1,4 +1,4 @@
-![WaterLevel](https://wokwi.com/projects/393310853107633153/)
+![project waterlevel diagram](https://github.com/user-attachments/assets/4210dc82-e08b-4966-8eeb-f487f5123e28)
 
 this project made for theach student in tedsaban 2 watsawang khongkha school province 
 # โครงงานเครื่องวัดระดับน้ำด้วยสมองกลฝังตัว
