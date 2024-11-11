@@ -1,4 +1,4 @@
-![WaterLevel.](https://wokwi.com/projects/393310853107633153)
+![WaterLevel](https://wokwi.com/projects/393310853107633153/)
 
 this project made for theach student in tedsaban 2 watsawang khongkha school province 
 # โครงงานเครื่องวัดระดับน้ำด้วยสมองกลฝังตัว
